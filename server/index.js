@@ -57,10 +57,27 @@ app.use(express.urlencoded({ extended: true }));
 
 // Health check endpoint
 app.get('/health', (req, res) => {
-  res.json({ 
-    status: 'healthy', 
+  res.json({
+    status: 'healthy',
     timestamp: new Date().toISOString(),
     version: process.env.npm_package_version || '1.0.0'
+  });
+});
+
+// Root API endpoint
+app.get('/api', (req, res) => {
+  res.json({
+    message: 'AI Binance Trading Platform API',
+    version: '1.0.0',
+    endpoints: {
+      health: '/health',
+      auth: '/api/auth',
+      trading: '/api/trading',
+      signals: '/api/signals',
+      portfolio: '/api/portfolio',
+      analytics: '/api/analytics'
+    },
+    timestamp: new Date().toISOString()
   });
 });
 
